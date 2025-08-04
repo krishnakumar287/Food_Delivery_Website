@@ -57,8 +57,8 @@ npm install
 Create a .env file in the backend directory and add the following:
 
 ```sh
-JWT_SECRET="random#secret"
-STRIPE_SECRET_KEY="sk_test_51JhWAiRXoTvIuM91beRv8XldfL3GGKyuLhzabkSwNeIXryY51G9UKnwNUFcotg0N6k4UAGhiprjJd4XhAF85JCN4004TC42zkl"
+JWT_SECRET="YOUR_JWT_SECRET_HERE"
+STRIPE_SECRET_KEY="YOUR_STRIPE_SECRET_KEY_HERE"
 ```
 
 Start the backend server:
