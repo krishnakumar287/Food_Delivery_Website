@@ -20,27 +20,38 @@ const Add = ({url}) => {
         setData(data=>({...data,[name]:value}))
     }
 
-    const onSubmitHandler = async (event) =>{
+    const [loading, setLoading] = useState(false);
+    const onSubmitHandler = async (event) => {
         event.preventDefault();
-        const formData = new FormData();
-        formData.append('name', data.name)
-        formData.append('description', data.description)
-        formData.append('price', Number(data.price))
-        formData.append('category', data.category)
-        formData.append('image', image)
-        const response = await axios.post(`${url}/api/food/add`, formData);
-
-        if(response.data.success){
-            setData({
-                name:'',
-                description:'',
-                price:'',
-                category:'Salad'
-            })
-            setImage(false);
-            toast.success(response.data.message)
-        }else{
-            toast.error(response.data.message)
+        if (!image) {
+            toast.error('Please upload an image.');
+            return;
+        }
+        setLoading(true);
+        try {
+            const formData = new FormData();
+            formData.append('name', data.name);
+            formData.append('description', data.description);
+            formData.append('price', Number(data.price));
+            formData.append('category', data.category);
+            formData.append('image', image);
+            const response = await axios.post(`${url}/api/food/add`, formData);
+            if (response.data.success) {
+                setData({
+                    name: '',
+                    description: '',
+                    price: '',
+                    category: 'Salad',
+                });
+                setImage(false);
+                toast.success(response.data.message);
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            toast.error('Failed to add item. Please try again.');
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -81,7 +92,7 @@ const Add = ({url}) => {
                     <input onChange={onChangeHandler} value={data.price} type="number" name='price' placeholder='$20'/>
                 </div>
             </div>
-            <button type='submit' className='add-btn'>ADD</button>
+            <button type='submit' className='add-btn' disabled={loading}>{loading ? 'ADDING...' : 'ADD'}</button>
         </form>
     </div>
   )
