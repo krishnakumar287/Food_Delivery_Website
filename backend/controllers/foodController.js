@@ -29,7 +29,12 @@ const addFood = async (req,res) =>{
 const listFood = async (req,res) =>{
     try {
         const foods = await foodModel.find({});
-        res.json({success:true,data:foods})
+        const url = req.protocol + '://' + req.get('host');
+        const foodsWithImageUrl = foods.map(food => ({
+            ...food._doc,
+            image: `${url}/uploads/${food.image}`
+        }));
+        res.json({success:true,data:foodsWithImageUrl})
     } catch (error) {
         console.log(error)
         res.json({success:false, message:'Error'})
