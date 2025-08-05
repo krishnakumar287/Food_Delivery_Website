@@ -1,42 +1,297 @@
-.add{
-    width: 70%;
-    margin-left: max(5vw, 25px);
-    margin-top: 50px;
-    color: #6d6d6d;
-    font-size: 16px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
 }
 
-.add form{
-    gap: 20px;
+ .add-page-container {
+  max-width: 800px;
+  margin: 2rem 0 0 2rem;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f3f4f6; /* light grey background */
+  min-height: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-.add-img-upload img{
-    width: 120px;
+ .add-page-form {
+  background: white;
+  padding: 1.2rem 1rem;
+  border-radius: 14px;
+  box-shadow: none !important;
+  width: 100%;
+  max-width: 400px;
+  display: grid;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.add-product-name, .add-product-description{
-    width: max(40%,280px);
+ .add-page-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
 }
 
-.add-product-name input , .add-product-description textarea{
-    padding: 10px;
+ .add-page-flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.add-category-price{
-    display: flex;
-    gap: 30px;
+/* Form Labels */
+ .add-page-form p {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.95rem;
+  margin: 0;
+  letter-spacing: 0.5px;
 }
 
-.add-category-price select, .add-category-price input{
-    max-width: 120px ;
-    padding: 10px;
+/* Image Upload Section */
+ .add-page-img-upload {
+  text-align: center;
+  padding: 1rem;
 }
 
-.add-btn{
-    max-width: 120px;
-    border: none;
-    padding: 10px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+ .add-page-img-upload label {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+ .add-page-img-upload label:hover {
+  transform: translateY(-2px);
+}
+
+ .add-page-img-upload img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px dashed #cbd5e0;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+}
+
+ .add-page-img-upload img:hover {
+  border-color: #667eea;
+  background: #edf2f7;
+}
+
+/* Input Styling */
+ .add-page-product-name input,
+ .add-page-product-description textarea,
+ .add-page-category-price select,
+ .add-page-category-price input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+  color: #2d3748;
+}
+
+ .add-page-product-name input:focus,
+ .add-page-product-description textarea:focus,
+ .add-page-category-price select:focus,
+ .add-page-category-price input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+ .add-page-product-name input::placeholder,
+ .add-page-product-description textarea::placeholder,
+ .add-page-category-price input::placeholder {
+  color: #a0aec0;
+  font-weight: 400;
+}
+
+/* Textarea Specific */
+ .add-page-product-description textarea {
+  resize: vertical;
+  min-height: 60px;
+  line-height: 1.6;
+}
+
+/* Category and Price Section */
+ .add-page-category-price {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+ .add-page-category select,
+ .add-page-price input {
+  max-width: none;
+}
+
+/* Select Dropdown */
+ .add-page-category select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  appearance: none;
+}
+
+/* Submit Button */
+ .add-page-btn {
+  width: 100%;
+  max-width: none;
+  padding: 0.7rem 1.2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+ .add-page-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+ .add-page-btn:hover::before {
+  left: 100%;
+}
+
+ .add-page-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: none !important;
+}
+
+ .add-page-btn:active {
+  transform: translateY(0);
+  box-shadow: none !important;
+}
+
+ .add-page-btn:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none !important;
+}
+
+ .add-page-btn:disabled::before {
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-page-container {
+    padding: 1rem;
+    background: white;
+  }
+  
+  .add-page-form {
+    padding: 0.7rem 0.5rem;
+    border-radius: 10px;
+    max-width: 98vw;
+  }
+  
+  .add-page-category-price {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .add-page-img-upload img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-page-form {
+    padding: 0.5rem 0.2rem;
+    gap: 0.7rem;
+    border-radius: 7px;
+  }
+  
+  .add-page-product-name input,
+  .add-page-product-description textarea,
+  .add-page-category-price select,
+  .add-page-category-price input {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.92rem;
+  }
+  
+  .add-page-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Loading Animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+ .add-page-btn:disabled {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Success/Error States */
+ .add-page-form input:valid,
+ .add-page-form textarea:valid {
+  border-color: #48bb78;
+}
+
+ .add-page-form input:invalid:not(:placeholder-shown),
+ .add-page-form textarea:invalid:not(:placeholder-shown) {
+  border-color: #f56565;
+}
+
+/* Custom Scrollbar for Textarea */
+ .add-page-product-description textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+ .add-page-product-description textarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+ .add-page-product-description textarea::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+ .add-page-product-description textarea::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
