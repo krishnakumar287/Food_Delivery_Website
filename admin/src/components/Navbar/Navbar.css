@@ -5,10 +5,16 @@
     padding: 8px 4%;
 }
 
+
 .navbar .logo{
-    width: max(10%,80px);
+    width: 230px;
+    height: auto;
 }
 
+
 .navbar .profile{
-    width: 40px;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
 }

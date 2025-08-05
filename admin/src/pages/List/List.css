@@ -1,11 +1,13 @@
 /* Modern Food List Table Styles */
+
 .list {
   font-family: 'Poppins', sans-serif;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
   background: #f8fafc;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .list p:first-child {
@@ -16,12 +18,16 @@
   text-align: center;
 }
 
+
 .list-table {
   background: white;
   border-radius: 16px;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   border: 1px solid #e2e8f0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .list-table-format {
@@ -124,15 +130,8 @@
   border-radius: 50%;
 }
 
-.cursor:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
-  border-color: #fca5a5;
-}
 
-.cursor:hover::before {
-  opacity: 1;
-}
+/* Remove hover effect from delete button */
 
 .cursor:active {
   transform: scale(0.95);
