@@ -19,6 +19,7 @@ const StoreContextProvider = (props) => {
         }
         if(token){
             await axios.post(url+'/api/cart/add',{itemId},{headers:{token}})
+            await loadCartData(token);
         }
     }
 
@@ -26,6 +27,7 @@ const StoreContextProvider = (props) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
         if(token){
             await axios.post(url+'/api/cart/remove',{itemId},{headers:{token}})
+            await loadCartData(token);
         }
     }
 
