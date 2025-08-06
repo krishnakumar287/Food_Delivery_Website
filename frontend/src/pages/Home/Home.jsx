@@ -6,10 +6,9 @@ import FoodDisplay from '../../components/FoodDisplay/FoodDisplay'
 import AppDownload from '../../components/AppDownload/AppDownload'
 
 const Home = () => {
-
   const [category, setCategory] = useState('All')
   return (
-    <div>
+    <div className="home-page">
       <Header/>
       <ExploreMenu category={category} setCategory={setCategory}/>
       <FoodDisplay category={category}/>
