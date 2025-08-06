@@ -25,28 +25,18 @@ const Navbar = ({setShowLogin}) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Function to handle smooth scrolling to hash links
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  
   // Set active menu based on current route
   useEffect(() => {
-    // Handle different route conditions
-    if (location.hash === '#app-download') {
-      setMenu('mobile-app');
+    if (location.pathname === '/') {
+      setMenu('home');
     } else if (location.hash === '#explore-menu') {
       setMenu('menu');
+    } else if (location.hash === '#app-download') {
+      setMenu('mobile-app');
     } else if (location.hash === '#footer') {
       setMenu('contact-us');
-    } else if (location.pathname === '/') {
-      // Only set home as active when there's no hash
-      setMenu('home');
     }
-  }, [location.pathname, location.hash]);
+  }, [location]);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -67,11 +57,9 @@ const Navbar = ({setShowLogin}) => {
       <div className="navbar-container">
         <div className="navbar-left">
           <button 
-            className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`}
+            className="mobile-menu-toggle" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-            aria-controls="navbar-menu"
           >
             <span></span>
             <span></span>
@@ -83,16 +71,13 @@ const Navbar = ({setShowLogin}) => {
           </Link>
         </div>
         
-        <ul id="navbar-menu" className={`navbar-menu ${mobileMenuOpen ? 'active' : ''}`} role="menu">
+        <ul className={`navbar-menu ${mobileMenuOpen ? 'active' : ''}`}>
           <li>
             <Link 
               to='/' 
               onClick={() => {
-                // Set the menu to home without preventing default navigation
                 setMenu('home');
                 setMobileMenuOpen(false);
-                // If needed, scroll to top of page
-                window.scrollTo(0, 0);
               }} 
               className={menu === 'home' ? 'active' : ''}
             >
@@ -102,15 +87,9 @@ const Navbar = ({setShowLogin}) => {
           <li>
             <a 
               href='#explore-menu' 
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={() => {
                 setMenu('menu');
                 setMobileMenuOpen(false);
-                // Get the section ID without the # symbol
-                const sectionId = 'explore-menu';
-                scrollToSection(sectionId);
-                // Update URL with hash for bookmarking without page reload
-                window.history.pushState(null, '', `#${sectionId}`);
               }} 
               className={menu === 'menu' ? 'active' : ''}
             >
@@ -120,15 +99,9 @@ const Navbar = ({setShowLogin}) => {
           <li>
             <a 
               href='#app-download' 
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={() => {
                 setMenu('mobile-app');
                 setMobileMenuOpen(false);
-                // Get the section ID without the # symbol
-                const sectionId = 'app-download';
-                scrollToSection(sectionId);
-                // Update URL with hash for bookmarking without page reload
-                window.history.pushState(null, '', `#${sectionId}`);
               }} 
               className={menu === 'mobile-app' ? 'active' : ''}
             >
@@ -138,15 +111,9 @@ const Navbar = ({setShowLogin}) => {
           <li>
             <a 
               href='#footer' 
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={() => {
                 setMenu('contact-us');
                 setMobileMenuOpen(false);
-                // Get the section ID without the # symbol
-                const sectionId = 'footer';
-                scrollToSection(sectionId);
-                // Update URL with hash for bookmarking without page reload
-                window.history.pushState(null, '', `#${sectionId}`);
               }} 
               className={menu === 'contact-us' ? 'active' : ''}
             >
@@ -230,22 +197,7 @@ const Navbar = ({setShowLogin}) => {
               Sign In
             </button>
           : 
-            <div 
-              className='navbar-profile' 
-              tabIndex="0" 
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  // Toggle dropdown visibility (we could use a state for this in a real implementation)
-                  const dropdown = e.currentTarget.querySelector('.nav-profile-dropdown');
-                  if (dropdown) {
-                    dropdown.style.opacity = dropdown.style.opacity === '1' ? '0' : '1';
-                    dropdown.style.visibility = dropdown.style.visibility === 'visible' ? 'hidden' : 'visible';
-                  }
-                }
-              }}
-              aria-haspopup="true"
-            >
+            <div className='navbar-profile'>
               <img src={assets.profile_icon} alt="Profile" />
               <div className="nav-profile-dropdown">
                 <div className="dropdown-item" onClick={() => navigate('/myorders')}>
@@ -264,11 +216,12 @@ const Navbar = ({setShowLogin}) => {
       </div>
       
       {/* Backdrop for mobile menu */}
-      <div 
-        className={`menu-backdrop ${mobileMenuOpen ? 'active' : ''}`} 
-        onClick={() => setMobileMenuOpen(false)}
-        aria-hidden="true"
-      ></div>
+      {mobileMenuOpen && (
+        <div 
+          className="menu-backdrop" 
+          onClick={() => setMobileMenuOpen(false)}
+        ></div>
+      )}
     </nav>
   );
 }
