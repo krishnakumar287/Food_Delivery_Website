@@ -28,14 +28,14 @@ const Cart = () => {
             <br />
             <hr />
             {food_list.map((item) => (
-              cartItems[item._id] > 0 ? (
+              cartItems[String(item._id)] > 0 ? (
                 <div key={item._id}>
                   <div className='cart-items-title cart-items-item'>
                     <img src={url + '/images/' + item.image} alt={item.name} />
                     <p>{item.name}</p>
                     <p>${item.price}</p>
-                    <p>{cartItems[item._id]}</p>
-                    <p>${item.price * cartItems[item._id]}</p>
+                    <p>{cartItems[String(item._id)]}</p>
+                    <p>${item.price * cartItems[String(item._id)]}</p>
                     <p onClick={() => removeFromCart(item._id)} className='cross'>x</p>
                   </div>
                   <hr />
