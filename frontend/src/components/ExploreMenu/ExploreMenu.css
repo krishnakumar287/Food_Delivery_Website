@@ -3,88 +3,278 @@
 .explore-menu {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 20px 0;
+  gap: 28px;
+  padding: 40px 0;
+  position: relative;
+}
+
+.explore-menu-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .explore-menu h1 {
   color: #262626;
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: 700;
+  font-size: 32px;
+  margin-bottom: 12px;
+  position: relative;
+  display: inline-block;
+}
+
+.explore-menu h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: tomato;
+  border-radius: 3px;
 }
 
 .explore-menu-text {
   max-width: 60%;
   color: #555;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+.explore-menu-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
 }
 
 .explore-menu-list {
   display: flex;
   gap: 30px;
   overflow-x: auto;
-  padding-bottom: 10px;
+  padding: 20px 10px;
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: tomato #f1f1f1;
+  position: relative;
+  width: 100%;
+  -ms-overflow-style: none;
+  flex-wrap: nowrap;
 }
 
 .explore-menu-list::-webkit-scrollbar {
-  display: none;
+  height: 5px;
+}
+
+.explore-menu-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.explore-menu-list::-webkit-scrollbar-thumb {
+  background: tomato;
+  border-radius: 10px;
 }
 
 .explore-menu-list-item {
   text-align: center;
   cursor: pointer;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  border-radius: 12px;
+  outline: none;
+}
+
+.menu-image-container {
+  position: relative;
+  margin-bottom: 10px;
 }
 
 .explore-menu-list-item img {
-  width: 7.5vw;
-  min-width: 80px;
-  height: 7.5vw;
-  min-height: 80px;
+  width: 8vw;
+  min-width: 90px;
+  height: 8vw;
+  min-height: 90px;
   object-fit: cover;
   border-radius: 50%;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   box-sizing: border-box;
+  border: 3px solid transparent;
+  filter: saturate(0.9);
 }
 
 .explore-menu-list-item:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+}
+
+.explore-menu-list-item:hover img {
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.15);
+  filter: saturate(1.1);
+}
+
+.explore-menu-list-item.active {
+  transform: translateY(-5px);
 }
 
 .explore-menu-list-item p {
-  margin-top: 10px;
-  color: #666;
-  font-size: max(1.2vw, 14px);
+  margin-top: 12px;
+  color: #444;
+  font-size: max(1.2vw, 15px);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.explore-menu-list-item:hover p,
+.explore-menu-list-item.active p {
+  color: tomato;
 }
 
 .explore-menu-list-item img.active {
-  border: 4px solid tomato;
-  padding: 2px;
+  border: 3px solid tomato;
+  padding: 3px;
   background-color: #fff;
-  box-shadow: 0 0 0 4px rgba(255, 99, 71, 0.2);
-  margin: 6px;
+  box-shadow: 0 8px 20px rgba(255, 99, 71, 0.2);
+  filter: saturate(1.2);
+}
+
+.active-indicator {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: tomato;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.2);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 99, 71, 0.5);
+  }
+  70% {
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 0 0 8px rgba(255, 99, 71, 0);
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 99, 71, 0);
+  }
 }
 
 .explore-menu hr {
-  margin: 10px 0;
-  height: 2px;
-  background-color: #e2e2e2;
+  margin: 15px 0;
+  height: 1px;
+  background-color: #eaeaea;
   border: none;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.scroll-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #555;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.scroll-arrow:hover {
+  background-color: tomato;
+  color: white;
+  box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+}
+
+.scroll-arrow:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.3);
+}
+
+.scroll-arrow.scroll-left {
+  left: 0;
+}
+
+.scroll-arrow.scroll-right {
+  right: 0;
+}
+
+.category-indicator {
+  text-align: center;
+  font-size: 15px;
+  color: #777;
+  margin-top: -10px;
+}
+
+.category-indicator span {
+  font-weight: 600;
+  color: tomato;
+}
+
+.explore-menu-list-item:focus-visible {
+  outline: 2px solid tomato;
+  border-radius: 12px;
 }
 
 /* Responsive Tweaks */
 @media (max-width: 1050px) {
+  .explore-menu {
+    padding: 30px 0;
+  }
+  
   .explore-menu-text {
-    max-width: 100%;
-    font-size: 14px;
+    max-width: 80%;
+    font-size: 15px;
   }
 
   .explore-menu h1 {
+    font-size: 28px;
+  }
+  
+  .explore-menu-container {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-menu-text {
+    max-width: 90%;
+    font-size: 14px;
+  }
+  
+  .explore-menu h1 {
     font-size: 24px;
+  }
+  
+  .explore-menu-list-item img {
+    min-width: 80px;
+    min-height: 80px;
+  }
+  
+  .explore-menu-container {
+    padding: 0 25px;
   }
 }
 
@@ -94,10 +284,31 @@
   }
 
   .explore-menu-list-item img {
-    width: 60px;
-    height: 60px;
+    min-width: 70px;
+    min-height: 70px;
+  }
+  
+  .explore-menu-text {
+    max-width: 100%;
+  }
+  
+  .scroll-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
   }
 }
 
-
-
+@media (prefers-reduced-motion: reduce) {
+  .explore-menu-list-item,
+  .explore-menu-list-item img,
+  .scroll-arrow,
+  .active-indicator {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .explore-menu-list {
+    scroll-behavior: auto;
+  }
+}
