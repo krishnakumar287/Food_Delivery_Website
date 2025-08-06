@@ -1,0 +1,220 @@
+.top-dish-item-card {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-dish-item-card.hovered {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(40, 72, 179, 0.15);
+}
+
+.top-dish-rank {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--weight-bold);
+  font-size: var(--font-xs);
+  box-shadow: 0 4px 10px rgba(40, 72, 179, 0.3);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.top-dish-item-card.hovered .top-dish-rank {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 6px 15px rgba(40, 72, 179, 0.4);
+}
+
+.top-dish-img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px 15px 0 0;
+}
+
+.top-dish-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.top-dish-item-card.hovered .top-dish-image {
+  transform: scale(1.05);
+}
+
+.top-dish-actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 15px 15px 0 0;
+  z-index: 2;
+}
+
+.top-dish-item-card.hovered .top-dish-actions {
+  opacity: 1;
+}
+
+.quick-view-btn {
+  background-color: white;
+  color: var(--color-text-primary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: var(--weight-medium);
+  font-size: var(--font-xxs);
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.quick-view-btn:hover {
+  background-color: var(--color-accent);
+  color: white;
+  transform: scale(1.05);
+}
+
+.top-dish-counter {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+}
+
+.top-dish-counter img {
+  width: 30px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.top-dish-counter img:hover {
+  transform: scale(1.1);
+}
+
+.top-dish-counter p {
+  font-size: var(--font-xs);
+  font-weight: var(--weight-medium);
+  margin: 0;
+}
+
+.add-icon {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
+  background-color: var(--color-accent);
+  padding: 8px;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.add-icon:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.top-dish-info {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-dish-name-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.top-dish-name-rating p {
+  font-size: var(--font-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.top-dish-desc {
+  color: var(--color-text-secondary);
+  font-size: var(--font-xxs);
+  line-height: var(--line-height-normal);
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.top-dish-price {
+  color: var(--color-accent);
+  font-size: var(--font-md);
+  font-weight: var(--weight-semibold);
+  margin-top: auto;
+}
+
+/* Modal styles are reused from FoodItem.css */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .top-dish-image {
+    height: 180px;
+  }
+  
+  .top-dish-name-rating p {
+    font-size: var(--font-xxs);
+  }
+  
+  .top-dish-price {
+    font-size: var(--font-sm);
+  }
+  
+  .top-dish-counter img,
+  .add-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-dish-item-card,
+  .top-dish-image,
+  .top-dish-counter img,
+  .add-icon,
+  .quick-view-btn {
+    transition: none !important;
+  }
+}

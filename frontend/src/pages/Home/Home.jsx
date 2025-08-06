@@ -4,6 +4,11 @@ import Header from '../../components/Header/Header'
 import ExploreMenu from '../../components/ExploreMenu/ExploreMenu'
 import FoodDisplay from '../../components/FoodDisplay/FoodDisplay'
 import AppDownload from '../../components/AppDownload/AppDownload'
+import TopDishes from '../../components/TopDishes/TopDishes'
+import FeatureSection from '../../components/FeatureSection/FeatureSection'
+import TestimonialSection from '../../components/TestimonialSection/TestimonialSection'
+import Newsletter from '../../components/Newsletter/Newsletter'
+import ScrollProgress from '../../components/ScrollProgress/ScrollProgress'
 
 const Home = () => {
   const [category, setCategory] = useState('All')
@@ -42,8 +47,11 @@ const Home = () => {
   
   return (
     <div className="home-container">
+      <ScrollProgress />
       <Header/>
       <ExploreMenu category={category} setCategory={setCategory}/>
+      <FeatureSection />
+      <TopDishes category={category} />
       {isLoading ? (
         <div className="skeleton-loader">
           <div className="skeleton-item"></div>
@@ -53,6 +61,8 @@ const Home = () => {
       ) : (
         <FoodDisplay category={category}/>
       )}
+      <TestimonialSection />
+      <Newsletter />
       <AppDownload/>
       
       {showBackToTop && (
@@ -61,7 +71,10 @@ const Home = () => {
           onClick={scrollToTop}
           aria-label="Back to top"
         >
-          ↑
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
         </button>
       )}
     </div>
