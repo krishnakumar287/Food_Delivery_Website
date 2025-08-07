@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import './Navbar.css'
 import { assets } from './../../assets/assets';
 import {Link, useNavigate, useLocation} from 'react-router-dom'
@@ -10,6 +10,9 @@ const Navbar = ({setShowLogin}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  
+  const profileDropdownRef = useRef(null);
   
   const {getTotalCartAmount, token, setToken} = useContext(StoreContext);
   const navigate = useNavigate();
@@ -48,9 +51,24 @@ const Navbar = ({setShowLogin}) => {
     }
   }, [location.pathname, location.hash]);
 
+  // Handle click outside to close profile dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
+        setProfileDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+  
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
+    setProfileDropdownOpen(false);
     navigate("/");
   }
   
@@ -231,28 +249,32 @@ const Navbar = ({setShowLogin}) => {
             </button>
           : 
             <div 
-              className='navbar-profile' 
-              tabIndex="0" 
+              className={`navbar-profile ${profileDropdownOpen ? 'active' : ''}`}
+              ref={profileDropdownRef}
+              onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
-                  // Toggle dropdown visibility (we could use a state for this in a real implementation)
-                  const dropdown = e.currentTarget.querySelector('.nav-profile-dropdown');
-                  if (dropdown) {
-                    dropdown.style.opacity = dropdown.style.opacity === '1' ? '0' : '1';
-                    dropdown.style.visibility = dropdown.style.visibility === 'visible' ? 'hidden' : 'visible';
-                  }
+                  setProfileDropdownOpen(!profileDropdownOpen);
                 }
               }}
+              tabIndex="0"
               aria-haspopup="true"
+              aria-expanded={profileDropdownOpen}
             >
               <img src={assets.profile_icon} alt="Profile" />
-              <div className="nav-profile-dropdown">
-                <div className="dropdown-item" onClick={() => navigate('/myorders')}>
+              <div className={`nav-profile-dropdown ${profileDropdownOpen ? 'active' : ''}`}>
+                <div className="dropdown-item" onClick={() => {
+                  navigate('/myorders');
+                  setProfileDropdownOpen(false);
+                }}>
                   <img src={assets.bag_icon} alt="Orders" />
                   <p>My Orders</p>
                 </div>
-                <div className="dropdown-item" onClick={() => navigate('/profile')}>
+                <div className="dropdown-item" onClick={() => {
+                  navigate('/profile');
+                  setProfileDropdownOpen(false);
+                }}>
                   <img src={assets.profile_icon} alt="Profile" />
                   <p>My Profile</p>
                 </div>

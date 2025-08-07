@@ -366,6 +366,12 @@
   border: 1px solid rgba(40, 72, 179, 0.05);
 }
 
+.nav-profile-dropdown.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 .nav-profile-dropdown::before {
   content: '';
   position: absolute;
