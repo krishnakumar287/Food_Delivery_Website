@@ -21,24 +21,24 @@ useEffect(()=>{
 },[token])
 
   return (
-    <div className='my-orders'>
-        <h2>My Orders</h2>
-        <div className="container">
+    <div className='my-orders-page'>
+        <h2 className="my-orders-page-title">My Orders</h2>
+        <div className="my-orders-page-container">
             {data.map((order, index)=>{
                     return (
-                        <div key={index} className="my-orders-order">
-                            <img src={assets.parcel_icon} alt="" />
-                            <p>{order.items.map((item, index)=>{
+                        <div key={index} className="my-orders-page-order">
+                            <img src={assets.parcel_icon} alt="" className="my-orders-page-order-icon" />
+                            <p className="my-orders-page-order-items">{order.items.map((item, index)=>{
                                 if(index === order.items.length-1){
                                     return item.name+" x "+item.quantity
                                 }else{
                                     return item.name+" x "+item.quantity + ","
                                 }
                             })}</p>
-                            <p>${order.amount}.00</p>
-                            <p>Items: {order.items.length}</p>
-                            <p><span>&#x25cf;</span><b>{order.status}</b></p>
-                            <button onClick={fetchOrders}>Track Order</button>
+                            <p className="my-orders-page-order-amount">${order.amount}.00</p>
+                            <p className="my-orders-page-order-count">Items: {order.items.length}</p>
+                            <p className="my-orders-page-order-status"><span>&#x25cf;</span><b>{order.status}</b></p>
+                            <button className="my-orders-page-track-button" onClick={fetchOrders}>Track Order</button>
                         </div>
                     )
             })}
