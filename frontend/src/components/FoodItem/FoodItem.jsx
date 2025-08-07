@@ -7,7 +7,25 @@ const FoodItem = ({id, name, price, description, image}) => {
     const {cartItems, addToCart, removeFromCart, url} = useContext(StoreContext);
     const [showDetails, setShowDetails] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-
+    
+    // Function to verify and fix image URL if needed
+    const getImageUrl = () => {
+        if (!image) {
+            return 'https://via.placeholder.com/300x200?text=Food+Image';
+        }
+        
+        // If it's already a full URL (includes http or https), use it directly
+        if (image.startsWith('http')) {
+            return image;
+        }
+        
+        // For relative paths, make sure they go to the uploads folder
+        if (image.includes('/uploads/')) {
+            return image;
+        } else {
+            return `${url}/uploads/${image}`;
+        }
+    };
     const handleAddToCart = () => {
         addToCart(id);
         // Show toast notification (in a real implementation)
@@ -26,7 +44,15 @@ const FoodItem = ({id, name, price, description, image}) => {
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className="food-item-img-container">
-                <img className='food-item-image' src={url+'/images/'+image} alt={name} />
+                <img 
+                    className='food-item-image' 
+                    src={getImageUrl()} 
+                    alt={name} 
+                    onError={(e) => {
+                        console.error("Image failed to load:", image);
+                        e.target.src = 'https://via.placeholder.com/300x200?text=Food+Image';
+                    }}
+                />
                 
                 {isHovered && !cartItems[id] && (
                     <div className="food-item-actions">
@@ -86,7 +112,13 @@ const FoodItem = ({id, name, price, description, image}) => {
                             ×
                         </button>
                         <div className="modal-body">
-                            <img src={url+'/images/'+image} alt={name} />
+                            <img 
+                                src={getImageUrl()} 
+                                alt={name} 
+                                onError={(e) => {
+                                    e.target.src = 'https://via.placeholder.com/500x300?text=Food+Image';
+                                }} 
+                            />
                             <div className="modal-info">
                                 <h3>{name}</h3>
                                 <p className="modal-description">{description}</p>

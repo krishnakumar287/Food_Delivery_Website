@@ -6,6 +6,25 @@ import { toast } from 'react-toastify';
 const List = ({url}) => {
 
   const [list, setList] = useState([]);
+  
+  // Function to verify and fix image URL if needed
+  const getImageUrl = (image) => {
+    if (!image) {
+      return 'https://via.placeholder.com/100x100?text=Food';
+    }
+    
+    // If it's already a full URL (includes http or https), use it directly
+    if (image.startsWith('http')) {
+      return image;
+    }
+    
+    // For relative paths, make sure they go to the uploads folder
+    if (image.includes('/uploads/')) {
+      return image;
+    } else {
+      return `${url}/uploads/${image}`;
+    }
+  };
 
   const fetchList = async () =>{
     const response = await axios.get(`${url}/api/food/list`)
@@ -56,7 +75,13 @@ const List = ({url}) => {
         {list.map((item,index)=>{
           return(
             <div key={index} className="list-table-format">
-              <img src={`${url}/images/`+item.image} alt="" />
+              <img 
+                src={getImageUrl(item.image)} 
+                alt={item.name}
+                onError={(e) => {
+                  e.target.src = 'https://via.placeholder.com/100x100?text=Food';
+                }} 
+              />
               <p>{item.name}</p>
               <p>{item.category}</p>
               <p>${item.price}</p>

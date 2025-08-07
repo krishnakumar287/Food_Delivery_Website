@@ -50,20 +50,11 @@ const Home = () => {
       <ScrollProgress />
       <Header/>
       <ExploreMenu category={category} setCategory={setCategory}/>
-      <FeatureSection />
       <TopDishes category={category} />
-      {isLoading ? (
-        <div className="skeleton-loader">
-          <div className="skeleton-item"></div>
-          <div className="skeleton-item"></div>
-          <div className="skeleton-item"></div>
-        </div>
-      ) : (
-        <FoodDisplay category={category}/>
-      )}
       <TestimonialSection />
+      <FeatureSection />
       <Newsletter />
-      <AppDownload/>
+      <AppDownload id="app-download" />
       
       {showBackToTop && (
         <button 

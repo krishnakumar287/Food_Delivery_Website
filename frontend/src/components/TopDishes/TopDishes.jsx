@@ -3,12 +3,14 @@ import './TopDishes.css';
 import { StoreContext } from '../context/StoreContext';
 import TopDishItem from './TopDishItem';
 import { useInView } from 'react-intersection-observer';
+import axios from 'axios';
 
 const TopDishes = ({ category }) => {
-  const { food_list } = useContext(StoreContext);
+  const { food_list, url } = useContext(StoreContext);
   const [topDishes, setTopDishes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryChanging, setCategoryChanging] = useState(false);
+  const [error, setError] = useState(null);
   
   // Use Intersection Observer for scroll animations
   const { ref, inView } = useInView({
@@ -18,29 +20,47 @@ const TopDishes = ({ category }) => {
 
   // Effect to handle category changes
   useEffect(() => {
-    if (food_list.length > 0) {
-      // Show brief loading state when category changes
-      setCategoryChanging(true);
-      
-      // Simulate a short delay to show loading state
-      setTimeout(() => {
-        // Filter dishes based on selected category
-        const filteredList = category === 'All' 
-          ? [...food_list] 
-          : food_list.filter(item => item.category === category);
+    const fetchTopDishes = async () => {
+      try {
+        setCategoryChanging(true);
+        setIsLoading(true);
+        setError(null);
         
-        // Sort by a random value to simulate "popular" dishes for this demo
-        // In production, you'd sort by actual ratings or order counts
-        const sorted = [...filteredList]
-          .sort(() => 0.5 - Math.random())
-          .slice(0, 6); // Show top 6 dishes
+        // Direct API call to get food items
+        const response = await axios.get(`${url}/api/food/list`);
         
-        setTopDishes(sorted);
+        if (response.data.success) {
+          // Filter dishes based on selected category
+          const allFoods = response.data.data;
+          console.log("API response sample:", allFoods.length > 0 ? 
+            { id: allFoods[0]._id, name: allFoods[0].name, image: allFoods[0].image } : 
+            "No items");
+            
+          const filteredList = category === 'All' 
+            ? [...allFoods] 
+            : allFoods.filter(item => item.category === category);
+            
+          // Sort by a random value to simulate "popular" dishes for this demo
+          const sorted = [...filteredList]
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 6); // Show top 6 dishes
+          
+          setTopDishes(sorted);
+        } else {
+          setError("Could not fetch food items");
+          console.error("API Error:", response.data.message);
+        }
+      } catch (err) {
+        setError("Error loading dishes");
+        console.error("Error fetching dishes:", err);
+      } finally {
         setIsLoading(false);
         setCategoryChanging(false);
-      }, 300);
-    }
-  }, [food_list, category]); // Added category as a dependency
+      }
+    };
+    
+    fetchTopDishes();
+  }, [category, url]);
 
   return (
     <section className="top-dishes-section" ref={ref}>
@@ -57,7 +77,12 @@ const TopDishes = ({ category }) => {
           </p>
         </div>
         
-        {(isLoading || categoryChanging) ? (
+        {error ? (
+          <div className="error-message">
+            <p>{error}</p>
+            <button onClick={() => window.location.reload()}>Try Again</button>
+          </div>
+        ) : (isLoading || categoryChanging) ? (
           <div className="top-dishes-skeleton">
             {[...Array(6)].map((_, index) => (
               <div key={index} className="dish-skeleton-card">

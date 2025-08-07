@@ -7,6 +7,25 @@ const Cart = () => {
   const { cartItems = {}, food_list = [], removeFromCart, getTotalCartAmount, url } = useContext(StoreContext);
   const navigate = useNavigate();
   const hasItems = food_list && food_list.length > 0 && Object.values(cartItems).some(qty => qty > 0);
+  
+  // Function to verify and fix image URL if needed
+  const getImageUrl = (image) => {
+    if (!image) {
+      return 'https://via.placeholder.com/100x100?text=Food';
+    }
+    
+    // If it's already a full URL (includes http or https), use it directly
+    if (image.startsWith('http')) {
+      return image;
+    }
+    
+    // For relative paths, make sure they go to the uploads folder
+    if (image.includes('/uploads/')) {
+      return image;
+    } else {
+      return `${url}/uploads/${image}`;
+    }
+  };
 
   return (
     <div className='cart'>
@@ -31,7 +50,13 @@ const Cart = () => {
               cartItems[item._id] > 0 ? (
                 <div key={item._id}>
                   <div className='cart-items-title cart-items-item'>
-                    <img src={url + '/images/' + item.image} alt={item.name} />
+                    <img 
+                      src={getImageUrl(item.image)} 
+                      alt={item.name} 
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/100x100?text=Food';
+                      }}
+                    />
                     <p>{item.name}</p>
                     <p>${item.price}</p>
                     <p>{cartItems[item._id]}</p>

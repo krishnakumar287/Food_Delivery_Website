@@ -51,10 +51,25 @@
   height: 220px;
   object-fit: cover;
   transition: transform 0.5s ease;
+  background-color: #f5f5f5;
+  border-radius: 12px 12px 0 0;
 }
 
 .top-dish-item-card.hovered .top-dish-image {
   transform: scale(1.05);
+}
+
+.top-dish-img-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 70%, rgba(0,0,0,0.2) 100%);
+  pointer-events: none;
+  border-radius: 15px 15px 0 0;
+  z-index: 1;
 }
 
 .top-dish-actions {

@@ -65,11 +65,17 @@
   margin-bottom: 40px;
   transition: opacity 0.3s ease;
   animation: fadeIn 0.5s ease;
+  padding: 15px 5px;
 }
 
 .top-dish-wrapper {
   animation: fadeInUp 0.5s ease forwards;
   opacity: 0;
+  transition: transform 0.3s ease;
+}
+
+.top-dish-wrapper:hover {
+  transform: translateY(-5px);
 }
 
 /* Top dish skeleton loading animation */
@@ -162,6 +168,39 @@
 .no-dishes-message p:last-child {
   font-size: var(--font-xs);
   color: var(--color-text-secondary);
+}
+
+.error-message {
+  text-align: center;
+  padding: 40px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
+  animation: fadeIn 0.5s ease;
+}
+
+.error-message p {
+  color: #e53935;
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.error-message button {
+  background-color: #3c64f4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.error-message button:hover {
+  background-color: #2a4cd4;
+  transform: translateY(-2px);
 }
 
 @keyframes fadeInUp {
