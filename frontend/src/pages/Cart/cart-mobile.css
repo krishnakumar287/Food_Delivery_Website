@@ -1,0 +1,82 @@
+/* Mobile Item Layout Styles with Updated Theme */
+.mobile-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mobile-total-section {
+    text-align: right;
+}
+
+.mobile-total-label {
+    font-size: var(--font-xxs);
+    color: var(--color-text-tertiary);
+    margin-bottom: 0.25rem;
+}
+
+.mobile-total-amount {
+    font-size: var(--font-md);
+    font-weight: var(--weight-bold);
+    color: var(--color-accent);
+}
+
+/* Responsive Design with Theme Variables */
+@media (max-width: 1024px) {
+    .cart-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-items-header {
+        display: none;
+    }
+    
+    .cart-item-desktop {
+        display: none;
+    }
+    
+    .cart-item-mobile {
+        display: block;
+    }
+    
+    .cart-title {
+        font-size: var(--font-xl);
+    }
+    
+    .summary-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-page {
+        padding: 1rem;
+    }
+    
+    .cart-item {
+        padding: 1rem;
+    }
+    
+    .summary-card {
+        padding: 1rem;
+    }
+    
+    .mobile-item-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+    
+    .mobile-total-section {
+        text-align: left;
+    }
+}

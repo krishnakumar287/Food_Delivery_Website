@@ -1,6 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './Cart.css';
 import './cart-title.css';
+import './cart-mobile.css';
+import './discount-notification.css';
 import { StoreContext } from '../../components/context/StoreContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +11,73 @@ const Cart = () => {
   const navigate = useNavigate();
   const hasItems = food_list && food_list.length > 0 && Object.values(cartItems).some(qty => qty > 0);
   const itemCount = getTotalCartItems();
+  
+  const [promoCode, setPromoCode] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
+  const [discountMessage, setDiscountMessage] = useState({});
+  const [discountedTotal, setDiscountedTotal] = useState(0);
+  const [discountAmount, setDiscountAmount] = useState(0);
+  
+  // Function to handle promo code application
+  const handleApplyPromoCode = () => {
+    if (!promoCode.trim()) return;
+    
+    // Simulating different promo codes
+    let discount = 0;
+    let message = {};
+    
+    if (promoCode.toLowerCase() === 'welcome10') {
+      discount = 0.1; // 10% discount
+      message = {
+        title: "10% Discount Applied!",
+        text: "You've received 10% off your order. Enjoy your meal!"
+      };
+    } else if (promoCode.toLowerCase() === 'special25') {
+      discount = 0.25; // 25% discount
+      message = {
+        title: "Special 25% Off!",
+        text: "You've unlocked our special 25% discount. Great savings!"
+      };
+    } else if (promoCode.toLowerCase() === 'freeship') {
+      discount = 2; // Free shipping ($2)
+      message = {
+        title: "Free Delivery!",
+        text: "Shipping fee has been waived. Enjoy free delivery!"
+      };
+    } else {
+      // Generic success message for any other code
+      discount = 0.05; // 5% discount
+      message = {
+        title: "Promo Code Applied!",
+        text: "You've received 5% off your order. Enjoy!"
+      };
+    }
+    
+    const subtotal = getTotalCartAmount();
+    let discountValue = 0;
+    
+    if (promoCode.toLowerCase() === 'freeship') {
+      discountValue = 2; // Just the shipping fee
+      setDiscountedTotal(subtotal); // Only subtotal without shipping
+    } else {
+      discountValue = subtotal * discount;
+      setDiscountedTotal(subtotal - discountValue);
+    }
+    
+    setDiscountAmount(discountValue);
+    setDiscountMessage(message);
+    setShowNotification(true);
+    
+    // Auto-hide notification after 5 seconds
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 5000);
+  };
+  
+  // Function to close notification manually
+  const closeNotification = () => {
+    setShowNotification(false);
+  };
   
   // Function to verify and fix image URL if needed
   const getImageUrl = (image) => {
@@ -31,6 +100,24 @@ const Cart = () => {
 
   return (
     <div className='cart-page'>
+      {/* Discount Notification */}
+      {showNotification && (
+        <div className="discount-notification-container">
+          <div className="discount-notification">
+            <div className="sparkle"></div>
+            <div className="sparkle"></div>
+            <div className="sparkle"></div>
+            <div className="sparkle"></div>
+            <div className="discount-icon">🎁</div>
+            <div className="discount-content">
+              <h4 className="discount-title">{discountMessage.title}</h4>
+              <p className="discount-message">{discountMessage.text}</p>
+            </div>
+            <button className="discount-close" onClick={closeNotification}>×</button>
+          </div>
+        </div>
+      )}
+      
       <div className='cart-container'>
         <div className='cart-header fade-in'>
           <h1 className="cart-title">
@@ -160,18 +247,34 @@ const Cart = () => {
                   <span>${getTotalCartAmount().toFixed(2)}</span>
                 </div>
                 
+                {discountAmount > 0 && (
+                  <>
+                    <div className='summary-row discount-row'>
+                      <span>Discount</span>
+                      <span className="discount-value">-${discountAmount.toFixed(2)}</span>
+                    </div>
+                    <hr className='summary-divider' />
+                  </>
+                )}
+                
                 <hr className='summary-divider' />
                 
                 <div className='summary-row'>
                   <span>Delivery Fee</span>
-                  <span>${getTotalCartAmount() === 0 ? '0.00' : '2.00'}</span>
+                  <span>${getTotalCartAmount() === 0 || (promoCode.toLowerCase() === 'freeship' && discountAmount > 0) ? '0.00' : '2.00'}</span>
                 </div>
                 
                 <hr className='summary-divider' />
                 
                 <div className='summary-total'>
                   <span className='total-label'>Total</span>
-                  <span className='total-amount'>${(getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2).toFixed(2)}</span>
+                  <span className='total-amount'>
+                    ${discountAmount > 0 
+                      ? (promoCode.toLowerCase() === 'freeship' 
+                          ? discountedTotal.toFixed(2) 
+                          : (discountedTotal + 2).toFixed(2))
+                      : (getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2).toFixed(2)}
+                  </span>
                 </div>
                 
                 <button 
@@ -181,15 +284,25 @@ const Cart = () => {
                 
                 <div className='promo-section'>
                   <h3 className='promo-title'>Have a promo code?</h3>
-                  <p className='promo-description'>Enter your code below to get a discount</p>
+                  <p className='promo-description'>
+                    Enter your code below to get a discount
+                    <span className="promo-hint"> (Try: welcome10, special25, freeship)</span>
+                  </p>
                   
                   <div className='promo-input-container'>
                     <input 
                       className='promo-input'
                       type='text' 
-                      placeholder='Enter promo code' 
+                      placeholder='Enter promo code'
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value)}
                     />
-                    <button className='promo-btn'>Apply</button>
+                    <button 
+                      className='promo-btn'
+                      onClick={handleApplyPromoCode}
+                    >
+                      Apply
+                    </button>
                   </div>
                 </div>
               </div>
