@@ -14,7 +14,7 @@ const Navbar = ({setShowLogin}) => {
   
   const profileDropdownRef = useRef(null);
   
-  const {getTotalCartAmount, token, setToken} = useContext(StoreContext);
+  const {getTotalCartAmount, getTotalCartItems, token, setToken} = useContext(StoreContext);
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -232,10 +232,13 @@ const Navbar = ({setShowLogin}) => {
           </div>
           
           <div className="cart-icon-container">
-            <Link to='/cart' className="cart-icon">
+            <Link 
+              to='/cart' 
+              className={`cart-icon ${getTotalCartItems() > 0 ? 'has-items' : ''}`}
+            >
               <img src={assets.basket_icon} alt="Cart" />
-              {getTotalCartAmount() > 0 && (
-                <span className="cart-count">{getTotalCartAmount()}</span>
+              {getTotalCartItems() > 0 && (
+                <span className="cart-count">{getTotalCartItems()}</span>
               )}
             </Link>
           </div>
