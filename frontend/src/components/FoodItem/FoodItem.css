@@ -39,9 +39,9 @@
 }
 
 .food-item-name-rating p {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
+    font-size: var(--font-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
 }
 
 .food-item-name-rating img{
@@ -49,9 +49,9 @@
 }
 
 .food-item-desc{
-    color: #676767;
-    font-size: 14px;
-    line-height: 1.4;
+    color: var(--color-text-secondary);
+    font-size: var(--font-xxs);
+    line-height: var(--line-height-normal);
     margin-bottom: 15px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -62,9 +62,9 @@
 }
 
 .food-item-price{
-    color: tomato;
-    font-size: 22px;
-    font-weight: 600;
+    color: var(--color-accent);
+    font-size: var(--font-md);
+    font-weight: var(--weight-semibold);
     margin: 10px 0px;
 }
 
@@ -89,8 +89,8 @@
 }
 
 .food-item-counter p{
-    font-size: 16px;
-    font-weight: 500;
+    font-size: var(--font-xs);
+    font-weight: var(--weight-medium);
 }
 
 .food-item-counter img{
@@ -140,18 +140,19 @@
 
 .quick-view-btn {
     background-color: white;
-    color: #333;
+    color: var(--color-text-primary);
     border: none;
     padding: 10px 15px;
     border-radius: 50px;
-    font-weight: 500;
+    font-weight: var(--weight-medium);
+    font-size: var(--font-xxs);
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .quick-view-btn:hover {
-    background-color: tomato;
+    background-color: var(--color-accent);
     color: white;
 }
 
@@ -217,39 +218,44 @@
 }
 
 .modal-info h3 {
-    font-size: 24px;
+    font-size: var(--font-lg);
+    font-family: var(--font-accent);
     margin-bottom: 15px;
-    color: #333;
+    color: var(--color-text-primary);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .modal-description {
-    color: #666;
+    color: var(--color-text-secondary);
+    font-size: var(--font-xs);
     margin-bottom: 20px;
-    line-height: 1.6;
+    line-height: var(--line-height-normal);
 }
 
 .modal-price {
-    font-size: 24px;
-    font-weight: 600;
-    color: tomato;
+    font-size: var(--font-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent);
     margin-bottom: 20px;
 }
 
 .add-to-cart-btn {
-    background-color: tomato;
+    background-color: var(--color-accent);
     color: white;
     border: none;
     padding: 12px 25px;
     border-radius: 50px;
-    font-weight: 500;
+    font-weight: var(--weight-medium);
+    font-size: var(--font-xs);
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 4px 10px rgba(255, 99, 71, 0.3);
+    box-shadow: 0 4px 10px rgba(40, 72, 179, 0.3);
 }
 
 .add-to-cart-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(255, 99, 71, 0.4);
+    box-shadow: 0 6px 15px rgba(40, 72, 179, 0.4);
 }
 
 @keyframes fadeIn {

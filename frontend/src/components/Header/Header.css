@@ -34,17 +34,19 @@
 }
 
 .header-contents h2{
-    font-weight: 600;
+    font-family: var(--font-accent);
+    font-weight: var(--weight-bold);
     color: white;
-    font-size: max(3vw, 22px);
+    font-size: clamp(var(--font-lg), 3vw, var(--font-xxxl));
     text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    line-height: 1.2;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
 }
 
 .header-contents p {
     color: white;
-    font-size: max(1vw, 14px);
-    line-height: 1.6;
+    font-size: clamp(var(--font-xxs), 1vw, var(--font-sm));
+    line-height: var(--line-height-relaxed);
     text-shadow: 0 1px 5px rgba(0,0,0,0.3);
     margin-bottom: 1vw;
 }
@@ -59,19 +61,19 @@
 .primary-btn {
     border: none;
     color: #fff;
-    font-weight: 600;
+    font-weight: var(--weight-semibold);
     padding: 1vw 2.3vw;
-    background-color: tomato;
-    font-size: max(1vw,13px);
+    background-color: var(--color-accent);
+    font-size: clamp(var(--font-xxs), 1vw, var(--font-sm));
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.4);
+    box-shadow: 0 4px 15px rgba(40, 72, 179, 0.4);
 }
 
 .primary-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(255, 99, 71, 0.5);
+    box-shadow: 0 7px 20px rgba(40, 72, 179, 0.5);
 }
 
 .header-subscribe {
@@ -88,7 +90,8 @@
     width: 100%;
     border: none;
     outline: none;
-    font-size: max(0.8vw, 12px);
+    font-size: clamp(var(--font-xxxs), 0.8vw, var(--font-xs));
+    font-family: var(--font-primary);
 }
 
 .header-subscribe button {
@@ -97,9 +100,10 @@
     border: none;
     padding: 1vw 1.5vw;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: var(--weight-medium);
     white-space: nowrap;
     transition: all 0.3s ease;
+    font-size: var(--font-xxs);
 }
 
 .header-subscribe button:hover {
@@ -127,24 +131,24 @@
 }
 
 .toast-notification p {
-    color: #333;
+    color: var(--color-text-primary);
     margin: 0;
-    font-size: 14px;
+    font-size: var(--font-xxs);
     text-shadow: none;
 }
 
 .toast-notification button {
     background: none;
     border: none;
-    color: #999;
+    color: var(--color-text-tertiary);
     cursor: pointer;
     margin-left: 10px;
-    font-size: 16px;
+    font-size: var(--font-xs);
     transition: color 0.3s;
 }
 
 .toast-notification button:hover {
-    color: #333;
+    color: var(--color-text-primary);
 }
 
 @keyframes fadeInUp {
@@ -190,15 +194,15 @@
     }
     
     .header-contents h2 {
-        font-size: 24px;
+        font-size: var(--font-lg);
     }
     
     .header-contents p {
-        font-size: 14px;
+        font-size: var(--font-xxs);
     }
     
     .primary-btn, .header-subscribe button, .header-subscribe input {
         padding: 10px 15px;
-        font-size: 14px;
+        font-size: var(--font-xxs);
     }
 }

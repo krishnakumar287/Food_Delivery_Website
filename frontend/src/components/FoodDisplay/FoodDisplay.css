@@ -6,20 +6,10 @@
 
 .food-display {
   margin-top: 40px;
-  padding: 20px;
+  padding: 40px 20px;
   background: #fdfdfd;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-.food-display h2 {
-  font-size: max(2.2vw, 24px);
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 16px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid #ff5e3a;
-  display: inline-block;
 }
 
 /* Food Grid Layout */
@@ -47,11 +37,11 @@
 /* Responsive Styling */
 @media (max-width: 768px) {
   .food-display {
-    padding: 15px;
+    padding: 30px 15px;
   }
 
   .food-display h2 {
-    font-size: 20px;
+    font-size: var(--font-lg);
   }
 
   .food-display-list {
@@ -62,7 +52,7 @@
 
 @media (max-width: 480px) {
   .food-display {
-    padding: 10px;
+    padding: 20px 10px;
   }
   .food-display-list {
     gap: 20px;

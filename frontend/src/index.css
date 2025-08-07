@@ -1,31 +1,191 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-*{
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root {
+  /* Typography Scale (8px-based scale) */
+  --font-xxxs: 0.75rem;  /* 12px */
+  --font-xxs: 0.875rem;  /* 14px */
+  --font-xs: 1rem;       /* 16px */
+  --font-sm: 1.125rem;   /* 18px */
+  --font-md: 1.25rem;    /* 20px */
+  --font-lg: 1.5rem;     /* 24px */
+  --font-xl: 2rem;       /* 32px */
+  --font-xxl: 2.5rem;    /* 40px */
+  --font-xxxl: 3rem;     /* 48px */
+  
+  /* Font Weights */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-loose: 1.8;
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-loose: 0.02em;
+  --letter-spacing-wide: 0.05em;
+  
+  /* Font Families */
+  --font-primary: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-accent: 'Playfair Display', Georgia, serif;
+  
+  /* Colors */
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #888888;
+  --color-text-light: #FFFFFF;
+  --color-text-accent: #2848b3;
+  
+  /* Theme Colors */
+  --color-accent: #2848b3;
+  --color-accent-light: #5a75cc;
+  --color-accent-dark: #1a3480;
+  --color-accent-translucent: rgba(40, 72, 179, 0.4);
+}
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Outfit;
+  font-family: var(--font-primary);
   scroll-behavior: smooth;
 }
 
-body{
+body {
   min-height: 100vh;
+  color: var(--color-text-primary);
+  font-size: var(--font-xs);
+  line-height: var(--line-height-normal);
+  font-weight: var(--weight-regular);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.3s ease;
 }
 
-.app{
-  width: 80%;
-  margin: auto;
+a:hover {
+  color: var(--color-text-accent);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.5em;
+  line-height: var(--line-height-tight);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h1 {
+  font-size: var(--font-xxl);
+  font-weight: var(--weight-extrabold);
+}
+
+h2 {
+  font-size: var(--font-xl);
+  font-weight: var(--weight-bold);
+}
+
+h3 {
+  font-size: var(--font-lg);
+  font-weight: var(--weight-semibold);
+}
+
+h4 {
+  font-size: var(--font-md);
+}
+
+h5 {
+  font-size: var(--font-sm);
+}
+
+h6 {
+  font-size: var(--font-xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+p {
+  margin-bottom: 1rem;
+  max-width: 65ch; /* Optimal reading width */
+}
+
+/* Accent text styling */
+.accent-text {
+  font-family: var(--font-accent);
+  font-weight: var(--weight-regular);
+}
+
+.text-highlight {
+  position: relative;
+  display: inline-block;
+  color: var(--color-text-accent);
+  font-weight: var(--weight-medium);
+}
+
+.text-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.25em;
+  background-color: rgba(255, 99, 71, 0.2);
+  border-radius: 4px;
+  z-index: -1;
+}
+
+.app {
+  width: 85%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 @keyframes fadeIn {
-  0%{
-    opacity:0 ;
+  0% {
+    opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
+  }
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  :root {
+    --font-xxl: 2rem;    /* 32px */
+    --font-xl: 1.75rem;  /* 28px */
+    --font-lg: 1.375rem; /* 22px */
+  }
+  
+  .app {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-xxl: 1.75rem; /* 28px */
+    --font-xl: 1.5rem;   /* 24px */
+    --font-lg: 1.25rem;  /* 20px */
+  }
+  
+  body {
+    font-size: 0.9375rem; /* 15px */
+  }
+  
+  .app {
+    width: 95%;
+    padding: 0 0.75rem;
   }
 }
