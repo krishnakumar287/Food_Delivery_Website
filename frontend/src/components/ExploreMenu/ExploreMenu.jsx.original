@@ -1,0 +1,31 @@
+import React, { useContext, useState, useEffect } from 'react'
+import './ExploreMenu.css'
+import { menu_list } from '../../assets/assets'
+
+const ExploreMenu = ({category, setCategory}) => {
+  return (
+    <div className='explore-menu' id='explore-menu'>
+        <h1>Explore Our <span>Menu</span></h1>
+        <p className='explore-menu-text'>
+            Lorem ipsum dolor sit amet consectetur. Ut tellus suspendisse nulla aliquam. Risus rutrum tellus eget ultrices.
+        </p>
+        <div className="explore-menu-list">
+            {menu_list.map((item,index)=>{
+                return (
+                    <div 
+                        onClick={()=>setCategory(item.menu_name)} 
+                        key={index} 
+                        className={`${category===item.menu_name ? 'active' : ''}`}
+                    >
+                        <img src={item.menu_image} alt="" />
+                        <p>{item.menu_name}</p>
+                    </div>
+                )
+            })}
+        </div>
+        <hr/>
+    </div>
+  )
+}
+
+export default ExploreMenu

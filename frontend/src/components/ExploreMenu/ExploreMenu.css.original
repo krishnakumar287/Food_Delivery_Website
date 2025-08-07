@@ -1,0 +1,71 @@
+.explore-menu{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 0 10px;
+    margin-top: 40px;
+}
+
+.explore-menu h1{
+    text-align: center;
+    font-weight: 700;
+    color: #545454;
+}
+
+.explore-menu h1 span{
+    color: #2848b3;
+}
+
+.explore-menu-text{
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    color: #828282;
+    margin-top: -30px;
+    font-size: 14px;
+}
+
+.explore-menu-list{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+}
+
+.explore-menu-list div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 80px;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.explore-menu-list div:hover{
+    background-color: rgb(250, 250, 250);
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.explore-menu-list .active{
+    background-color: rgb(250, 250, 250);
+    border: 1px solid rgb(240, 240, 240);
+}
+
+.explore-menu-list div img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.explore-menu-list div p{
+    font-size: 13px;
+    color: #545454;
+    text-align: center;
+}
