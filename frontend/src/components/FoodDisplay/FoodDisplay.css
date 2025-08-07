@@ -14,10 +14,9 @@
 
 /* Food Grid Layout */
 .food-display-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  flex-direction: row;
   gap: 35px;
-  row-gap: 50px;
   padding-top: 10px;
 }
 
@@ -55,8 +54,8 @@
   .food-display {
     padding: 20px 10px;
   }
-
   .food-display-list {
-    grid-template-columns: 1fr;
+    gap: 20px;
+    flex-direction: column;
   }
 }
