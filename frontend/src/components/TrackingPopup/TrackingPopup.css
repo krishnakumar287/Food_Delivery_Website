@@ -1,0 +1,329 @@
+/* TrackingPopup.css */
+.tracking-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  transition: background-color 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.tracking-popup.opening {
+  animation: backdropFadeIn 0.4s forwards;
+}
+
+.tracking-popup.open {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.tracking-popup.closing {
+  animation: backdropFadeOut 0.4s forwards;
+}
+
+.tracking-popup-content {
+  background-color: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 550px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 2rem;
+}
+
+.tracking-popup-content.opening {
+  animation: popupSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.tracking-popup-content.closing {
+  animation: popupSlideDown 0.4s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
+}
+
+.tracking-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #4b5563;
+  transition: all 0.3s ease;
+}
+
+.tracking-close-btn:hover {
+  background-color: #e5e7eb;
+  transform: rotate(90deg);
+}
+
+.tracking-header {
+  margin-bottom: 2rem;
+}
+
+.tracking-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.tracking-order-id {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.tracking-status {
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.tracking-progress-container {
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.tracking-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3B82F6, #2563EB);
+  border-radius: 3px;
+  transition: width 1s ease-in-out;
+}
+
+.tracking-progress-bar.cancelled {
+  background: linear-gradient(90deg, #EF4444, #B91C1C);
+}
+
+.tracking-status-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #3B82F6;
+  text-align: center;
+}
+
+.tracking-status-text.cancelled {
+  color: #EF4444;
+}
+
+.tracking-timeline {
+  margin-bottom: 2rem;
+}
+
+.tracking-stage {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tracking-stage-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tracking-stage-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.tracking-stage.completed .tracking-stage-icon {
+  background-color: #3B82F6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+.tracking-check {
+  color: white;
+  font-size: 0.8rem;
+}
+
+.tracking-stage-line {
+  width: 2px;
+  height: 35px;
+  background-color: #e2e8f0;
+  margin-top: 4px;
+}
+
+.tracking-stage.completed .tracking-stage-line {
+  background-color: #3B82F6;
+}
+
+.tracking-stage-line.cancelled {
+  background-color: #fee2e2;
+}
+
+.tracking-stage.completed.cancelled .tracking-stage-line {
+  background-color: #EF4444;
+}
+
+.tracking-stage-content {
+  margin-top: 2px;
+  padding-bottom: 1rem;
+}
+
+.tracking-stage-name {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.tracking-stage.completed .tracking-stage-name {
+  color: #3B82F6;
+}
+
+.tracking-stage.completed.cancelled .tracking-stage-name {
+  color: #EF4444;
+}
+
+.tracking-stage-icon.cancelled {
+  background-color: #fee2e2;
+}
+
+.tracking-stage.completed .tracking-stage-icon.cancelled {
+  background-color: #EF4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+}
+
+.tracking-stage-time {
+  font-size: 0.8rem;
+  color: #6b7280;
+  display: flex;
+  flex-direction: column;
+}
+
+.tracking-exact-time {
+  font-size: 0.7rem;
+  color: #9ca3af;
+  margin-top: 2px;
+}
+
+.tracking-popup-content.cancelled .tracking-header h2 {
+  color: #EF4444;
+}
+
+.tracking-cancelled-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #EF4444;
+  font-weight: 500;
+  background-color: #fee2e2;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+}
+
+.tracking-cancelled-icon {
+  font-size: 1.1rem;
+}
+
+.tracking-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tracking-estimated-time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.tracking-time-icon {
+  font-size: 1.1rem;
+}
+
+.tracking-support-btn {
+  background: none;
+  border: 1px solid #3B82F6;
+  color: #3B82F6;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tracking-support-btn:hover {
+  background-color: #3B82F6;
+  color: white;
+}
+
+/* Animations */
+@keyframes backdropFadeIn {
+  from { background-color: rgba(0, 0, 0, 0); backdrop-filter: blur(0); }
+  to { background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); }
+}
+
+@keyframes backdropFadeOut {
+  from { background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); }
+  to { background-color: rgba(0, 0, 0, 0); backdrop-filter: blur(0); }
+}
+
+@keyframes popupSlideUp {
+  from { transform: translateY(50px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes popupSlideDown {
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to { transform: translateY(50px) scale(0.95); opacity: 0; }
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+  .tracking-popup-content {
+    padding: 1.5rem;
+  }
+  
+  .tracking-status {
+    padding: 1rem;
+  }
+  
+  .tracking-stage {
+    gap: 0.75rem;
+  }
+  
+  .tracking-stage-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .tracking-footer {
+    flex-direction: column;
+  }
+  
+  .tracking-support-btn {
+    width: 100%;
+  }
+}

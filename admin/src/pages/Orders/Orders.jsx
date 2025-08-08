@@ -59,11 +59,27 @@ const Orders = ({url}) => {
             </div>
             <p>Itmes: {order.items.length}</p>
             <p>${order.amount}</p>
-            <select onChange={(event)=> statusHandler(event,order._id)} value={order.status} >
+            <select 
+              onChange={(event)=> statusHandler(event,order._id)} 
+              value={order.status}
+              className={`status-select status-${order.status.toLowerCase().replace(/\s+/g, '-')}`}
+            >
+              <option value="Order Confirmed">Order Confirmed</option>
               <option value="Food Processing">Food Processing</option>
+              <option value="Ready for Pickup">Ready for Pickup</option>
               <option value="Out for delivery">Out for delivery</option>
               <option value="Delivered">Delivered</option>
+              <option value="Cancelled">Cancelled</option>
             </select>
+            {order.trackingHistory && (
+              <button 
+                className="view-tracking-btn"
+                onClick={() => window.open(`/tracking/${order._id}`, '_blank')}
+                title="View detailed tracking history"
+              >
+                View History
+              </button>
+            )}
           </div>
         ))}
       </div>

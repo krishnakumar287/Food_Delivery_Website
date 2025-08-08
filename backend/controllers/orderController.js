@@ -96,8 +96,27 @@ const listOrders = async (req,res) =>{
 // api for updating order status
 const updateStatus = async (req, res) =>{
     try {
-        await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status})
-        res.json({success:true, message:"Status Updated"})
+        const order = await orderModel.findById(req.body.orderId);
+        
+        if (!order) {
+            return res.json({success:false, message:"Order not found"});
+        }
+        
+        // Only update tracking history if status is different
+        if (order.status !== req.body.status) {
+            // Add new entry to tracking history
+            order.trackingHistory.push({
+                status: req.body.status,
+                timestamp: new Date()
+            });
+            
+            // Update the main status
+            order.status = req.body.status;
+            
+            await order.save();
+        }
+        
+        res.json({success:true, message:"Status Updated", data: order})
     } catch (error) {
         console.log(error)
         res.json({success:false, message:"Error"})  
