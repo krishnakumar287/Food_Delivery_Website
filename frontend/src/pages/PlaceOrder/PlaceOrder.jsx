@@ -172,6 +172,7 @@ const PlaceOrder = () => {
     <form onSubmit={placeOrder} className='place-order'>
       <div className="place-order-left">
         <div className="place-order-header">
+        
           <div className="header-content">
             <h1 className="title">Checkout</h1>
             <div className="checkout-badge">Secure Payment</div>
@@ -179,14 +180,11 @@ const PlaceOrder = () => {
           <p className="place-order-subtitle">
             Please fill in your delivery details to complete your order
           </p>
-          <div className="security-note">
-            <span className="security-icon">🔒</span>
-            Your information is encrypted and secure
-          </div>
         </div>
         
         {/* Progress Steps */}
         <div className="form-step">
+          <div className="progress-line" style={{ width: '50%' }}></div>
           <div className="step completed">
             <div className="step-number">1</div>
             <div className="step-label">Cart</div>
@@ -201,192 +199,131 @@ const PlaceOrder = () => {
           </div>
         </div>
         
-        <div className="form-group">
-          <label className="form-label">
-            <span className="label-icon">👤</span> 
-            Full Name <span className="form-required">*</span>
-          </label>
-          <div className="multi-fields">
-            <div className="field-container">
-              <div className="input-wrapper">
-                <input 
-                  required 
-                  name='firstName' 
-                  onChange={onChangeHandler} 
-                  value={data.firstName} 
-                  type="text" 
-                  placeholder='First Name'
-                  className={formErrors.firstName ? 'error-input' : ''}
-                />
-                <span className="field-icon">
-                  {data.firstName ? '✓' : ''}
-                </span>
-              </div>
-              {formErrors.firstName && <div className="form-hint error">{formErrors.firstName}</div>}
-            </div>
-            <div className="field-container">
-              <div className="input-wrapper">
-                <input 
-                  required 
-                  name='lastName' 
-                  onChange={onChangeHandler} 
-                  value={data.lastName} 
-                  type="text" 
-                  placeholder='Last Name'
-                  className={formErrors.lastName ? 'error-input' : ''}
-                />
-                <span className="field-icon">
-                  {data.lastName ? '✓' : ''}
-                </span>
-              </div>
-              {formErrors.lastName && <div className="form-hint error">{formErrors.lastName}</div>}
-            </div>
-          </div>
-        </div>
-        
-        <div className="form-group">
-          <label className="form-label">
-            <span className="label-icon">📱</span>
-            Contact Information <span className="form-required">*</span>
-          </label>
-          <div className="input-wrapper">
-            <input 
-              required 
-              name='email' 
-              onChange={onChangeHandler} 
-              value={data.email} 
-              type="email" 
-              placeholder='Email address'
-              className={formErrors.email ? 'error-input' : ''}
-            />
-            <span className="field-icon email-icon">
-              {data.email ? (formErrors.email ? '❌' : '✓') : '@'}
-            </span>
-          </div>
-          {formErrors.email && <div className="form-hint error">{formErrors.email}</div>}
-          
-          <div className="input-wrapper">
-            <input 
-              required 
-              name='phone' 
-              onChange={handlePhoneChange} 
-              value={data.phone} 
-              type="tel" 
-              placeholder='Phone number'
-              className={formErrors.phone ? 'error-input' : ''}
-            />
-            <span className="field-icon phone-icon">
-              {data.phone ? (formErrors.phone ? '❌' : '✓') : '☎️'}
-            </span>
-          </div>
-          {formErrors.phone && <div className="form-hint error">{formErrors.phone}</div>}
-          <div className="form-hint info">
-            <span className="info-icon">ℹ️</span>
-            We'll use this to contact you about your order if needed
-          </div>
-        </div>
-        
-        <div className="form-group address-form">
-          <label className="form-label">
-            <span className="label-icon">🏠</span>
-            Delivery Address <span className="form-required">*</span>
-          </label>
-          
-          <div className="address-card">
-            <div className="input-wrapper">
+        {/* Checkout Form */}
+        <div className="checkout-form">
+          {/* Full Name */}
+          <div className="form-section">
+            <label className="form-label">
+              <i className="icon fa fa-user"></i>
+              Full Name <span className="required">*</span>
+            </label>
+            <div className="form-group">
               <input 
-                required 
-                name='street' 
-                onChange={onChangeHandler} 
-                value={data.street} 
                 type="text" 
-                placeholder='Street address'
-                className={formErrors.street ? 'error-input' : ''}
+                placeholder="First Name" 
+                name="firstName"
+                value={data.firstName}
+                onChange={onChangeHandler}
+                className={formErrors.firstName ? 'error-input' : ''}
+                required
               />
-              <span className="field-icon">
-                {data.street ? '✓' : '📍'}
-              </span>
+              <input 
+                type="text" 
+                placeholder="Last Name" 
+                name="lastName"
+                value={data.lastName}
+                onChange={onChangeHandler}
+                className={formErrors.lastName ? 'error-input' : ''}
+                required
+              />
+            </div>
+            {formErrors.firstName && <div className="form-hint error">{formErrors.firstName}</div>}
+            {formErrors.lastName && <div className="form-hint error">{formErrors.lastName}</div>}
+          </div>
+
+          {/* Contact Information */}
+          <div className="form-section">
+            <label className="form-label">
+              <i className="icon fa fa-envelope"></i>
+              Contact Information <span className="required">*</span>
+            </label>
+            <div className="form-group">
+              <input 
+                type="email" 
+                placeholder="Email" 
+                name="email"
+                value={data.email}
+                onChange={onChangeHandler}
+                className={formErrors.email ? 'error-input' : ''}
+                required
+              />
+              <input 
+                type="tel" 
+                placeholder="Phone" 
+                name="phone"
+                value={data.phone}
+                onChange={handlePhoneChange}
+                className={formErrors.phone ? 'error-input' : ''}
+                required
+              />
+            </div>
+            {formErrors.email && <div className="form-hint error">{formErrors.email}</div>}
+            {formErrors.phone && <div className="form-hint error">{formErrors.phone}</div>}
+            <small className="form-note">We'll use this to contact you about your order if needed</small>
+          </div>
+
+          {/* Delivery Address */}
+          <div className="form-section">
+            <label className="form-label">
+              <i className="icon fa fa-map-marker"></i>
+              Delivery Address <span className="required">*</span>
+            </label>
+            <div className="form-group">
+              <input 
+                type="text" 
+                placeholder="Street address" 
+                name="street"
+                value={data.street}
+                onChange={onChangeHandler}
+                className={formErrors.street ? 'error-input' : ''}
+                required
+              />
+              <input 
+                type="text" 
+                placeholder="City" 
+                name="city"
+                value={data.city}
+                onChange={onChangeHandler}
+                className={formErrors.city ? 'error-input' : ''}
+                required
+              />
+              <input 
+                type="text" 
+                placeholder="State" 
+                name="state"
+                value={data.state}
+                onChange={onChangeHandler}
+                className={formErrors.state ? 'error-input' : ''}
+                required
+              />
+              <input 
+                type="text" 
+                placeholder="Zip code" 
+                name="zipcode"
+                value={data.zipcode}
+                onChange={onChangeHandler}
+                className={formErrors.zipcode ? 'error-input' : ''}
+                required
+              />
+              <select 
+                name="country"
+                value={data.country}
+                onChange={onChangeHandler}
+                className={formErrors.country ? 'error-input' : ''}
+                required
+              >
+                <option value="">Select Country</option>
+                <option value="USA">United States</option>
+                <option value="India">India</option>
+                <option value="Canada">Canada</option>
+                <option value="Mexico">Mexico</option>
+              </select>
             </div>
             {formErrors.street && <div className="form-hint error">{formErrors.street}</div>}
-            
-            <div className="address-grid">
-              <div className="field-container">
-                <div className="input-wrapper">
-                  <input 
-                    required 
-                    name='city' 
-                    onChange={onChangeHandler} 
-                    value={data.city} 
-                    type="text" 
-                    placeholder='City'
-                    className={formErrors.city ? 'error-input' : ''}
-                  />
-                  <span className="field-icon">
-                    {data.city ? '✓' : '🏙️'}
-                  </span>
-                </div>
-                {formErrors.city && <div className="form-hint error">{formErrors.city}</div>}
-              </div>
-              
-              <div className="field-container">
-                <div className="input-wrapper">
-                  <input 
-                    required 
-                    name='state' 
-                    onChange={onChangeHandler} 
-                    value={data.state} 
-                    type="text" 
-                    placeholder='State'
-                    className={formErrors.state ? 'error-input' : ''}
-                  />
-                  <span className="field-icon">
-                    {data.state ? '✓' : '🗺️'}
-                  </span>
-                </div>
-                {formErrors.state && <div className="form-hint error">{formErrors.state}</div>}
-              </div>
-            </div>
-            
-            <div className="address-grid">
-              <div className="field-container">
-                <div className="input-wrapper">
-                  <input 
-                    required 
-                    name='zipcode' 
-                    onChange={onChangeHandler} 
-                    value={data.zipcode} 
-                    type="text" 
-                    placeholder='Zip code'
-                    className={formErrors.zipcode ? 'error-input' : ''}
-                  />
-                  <span className="field-icon">
-                    {data.zipcode ? '✓' : '#️⃣'}
-                  </span>
-                </div>
-                {formErrors.zipcode && <div className="form-hint error">{formErrors.zipcode}</div>}
-              </div>
-              
-              <div className="field-container">
-                <div className="input-wrapper">
-                  <select
-                    required 
-                    name='country' 
-                    onChange={onChangeHandler} 
-                    value={data.country}
-                    className={formErrors.country ? 'error-input' : ''}
-                  >
-                    <option value="">Select Country</option>
-                    <option value="USA">United States</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Mexico">Mexico</option>
-                  </select>
-                  <span className="field-icon">
-                    {data.country ? '✓' : '🌎'}
-                  </span>
-                </div>
-                {formErrors.country && <div className="form-hint error">{formErrors.country}</div>}
-              </div>
-            </div>
+            {formErrors.city && <div className="form-hint error">{formErrors.city}</div>}
+            {formErrors.state && <div className="form-hint error">{formErrors.state}</div>}
+            {formErrors.zipcode && <div className="form-hint error">{formErrors.zipcode}</div>}
+            {formErrors.country && <div className="form-hint error">{formErrors.country}</div>}
           </div>
         </div>
         

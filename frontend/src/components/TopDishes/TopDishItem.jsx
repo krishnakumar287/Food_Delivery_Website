@@ -9,7 +9,9 @@ const TopDishItem = ({ id, name, description, price, image, rank }) => {
   const [showPopup, setShowPopup] = useState(false);
   const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
 
+  // ✅ Return early if id is missing (prevents runtime errors)
   if (!id) return null;
+
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
   
