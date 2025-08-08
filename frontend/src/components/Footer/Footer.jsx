@@ -41,8 +41,8 @@ const Footer = () => {
         <div className="footer-column contact-newsletter">
           <h4>Get in Touch</h4>
           <ul>
-            <li><a href="tel:+94765489545">+94 765 489 545</a></li>
-            <li><a href="mailto:dulanjalisemarantha93@gmail.com">dulanjalisemarantha93@gmail.com</a></li>
+            <li><a href="tel:+94765489545">+91 1234567890</a></li>
+            <li><a href="mailto:dulanjalisemarantha93@gmail.com">eatonwheels@gmail.com</a></li>
           </ul>
           <div className="newsletter">
             <h4>Newsletter Signup</h4>
@@ -61,7 +61,7 @@ const Footer = () => {
           <img src={assets.paypal_icon} alt="PayPal" />
         </div>
         <p className="copyright">
-          © {currentYear} Dulanjali - All Rights Reserved.
+          © {currentYear} EatOnwheels - All Rights Reserved.
         </p>
       </div>
     </footer>

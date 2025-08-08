@@ -119,9 +119,7 @@
   filter: brightness(0) invert(1);
   transition: filter 0.3s;
 }
-.payment-icons img:hover {
-  filter: brightness(0.8) invert(1);
-}
+
 
 @media (max-width: 768px) {
   .footer-container {
