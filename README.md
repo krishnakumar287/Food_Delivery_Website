@@ -106,8 +106,8 @@ npm run dev
 ```
 
 ## Usage
-Access the customer-facing app at http://localhost:5173.
-Access the admin app at http://localhost:5174.
+Access the customer-facing app https://food-delivery-website-2-5x0z.onrender.com.
+Access the admin app at https://food-delivery-website-2-5x0z.onrender.com.
 Register as a new user or log in with existing credentials.
 Browse the menu, add items to the cart, and place an order.
 Pay using dummy visa card

@@ -33,7 +33,7 @@ app.get("/",(req,res)=>{
 })
 
 app.listen(port,()=>{
-    console.log(`Server started on http://localhost:${port}`)
+    console.log(`Server started on https://food-delivery-website-2-5x0z.onrender.com`)
 })
 
 //mongodb+srv://dulanjalisenarathna93:E2JUb0zfaT2FVp8D@cluster0.exkxkun.mongodb.net/?
