@@ -7,7 +7,7 @@ export default defineConfig({
   base: process.env.VITE_BASH_PATH || "/Food_Delivery_Website",
   server: {
     proxy: {
-      '/api': 'https://food-delivery-website-2-5x0z.onrender.com'
+      '/api': 'https://food-delivery-website-3-tq77.onrender.com'
     }
   }
 })
