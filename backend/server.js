@@ -13,7 +13,10 @@ const port = 4000
 
 // middleware
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'],
+    credentials: true
+}))
 
 //db connection
 connectDB();
@@ -33,7 +36,6 @@ app.get("/",(req,res)=>{
 })
 
 app.listen(port,()=>{
-    console.log(`Server started on https://food-delivery-website-3-tq77.onrender.com`)
+    console.log(`Server started on http://localhost:${port}`)
 })
 
-//mongodb+srv://dulanjalisenarathna93:E2JUb0zfaT2FVp8D@cluster0.exkxkun.mongodb.net/?

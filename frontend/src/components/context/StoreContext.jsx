@@ -6,7 +6,7 @@ export const StoreContext = createContext(null)
 const StoreContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState({});
-    const url = "https://food-delivery-website-3-tq77.onrender.com";
+    const url = "http://localhost:4000";
     const [token,setToken] = useState("");
 
     const [food_list, setFoodList] = useState([]);
@@ -14,7 +14,7 @@ const StoreContextProvider = (props) => {
     const addToCart = async (itemId) => {
         const key = String(itemId);
         setCartItems(prev => {
-            const updatedCart = { ...prev, [key]: prev[key] ? prev[key] + 1 : 1 };
+            const updatedCart = { ...prev, [key]: (prev && prev[key]) ? prev[key] + 1 : 1 };
             if (!token) {
                 localStorage.setItem('guest_cart', JSON.stringify(updatedCart));
             }
@@ -29,6 +29,7 @@ const StoreContextProvider = (props) => {
     const removeFromCart = async (itemId) => {
         const key = String(itemId);
         setCartItems(prev => {
+            if (!prev || !prev[key]) return prev || {};
             const updatedCart = { ...prev, [key]: prev[key] - 1 };
             if (!token) {
                 localStorage.setItem('guest_cart', JSON.stringify(updatedCart));
@@ -70,8 +71,13 @@ const StoreContextProvider = (props) => {
     }
 
     const loadCartData = async (token) =>{
-        const response = await axios.post(url+"/api/cart/get",{},{headers:{token}})
-        setCartItems(response.data.cartData);
+        try {
+            const response = await axios.post(url+"/api/cart/get",{},{headers:{token}})
+            setCartItems(response.data.cartData || {});
+        } catch (error) {
+            console.error('Error loading cart data:', error);
+            setCartItems({});
+        }
     }
 
     useEffect(()=>{
@@ -81,7 +87,11 @@ const StoreContextProvider = (props) => {
                 setToken(localStorage.getItem("token"));
                 await loadCartData(localStorage.getItem("token"))
             } else if(localStorage.getItem('guest_cart')) {
-                setCartItems(JSON.parse(localStorage.getItem('guest_cart')));
+                try {
+                    setCartItems(JSON.parse(localStorage.getItem('guest_cart')) || {});
+                } catch (e) {
+                    setCartItems({});
+                }
             }
         }
         loadData();
