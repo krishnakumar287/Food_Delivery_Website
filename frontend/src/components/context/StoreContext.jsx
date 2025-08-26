@@ -3,6 +3,10 @@ import axios from 'axios'
 
 export const StoreContext = createContext(null)
 
+// Configure axios defaults
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
 const StoreContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState({});
