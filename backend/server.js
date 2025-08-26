@@ -14,20 +14,16 @@ const port = process.env.PORT || 4000
 // middleware
 app.use(express.json())
 
-// Enable CORS for all routes
-app.use(cors())
+// Configure CORS
+app.use(cors({
+    origin: ['https://food-delivery-website-kappa-three.vercel.app', 'http://localhost:5173', 'http://localhost:5174'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'token', 'x-requested-with']
+}));
 
-// Additional headers for CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://food-delivery-website-kappa-three.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, token');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-    next();
-});
+// Pre-flight requests
+app.options('*', cors());
 
 //db connection
 connectDB();
